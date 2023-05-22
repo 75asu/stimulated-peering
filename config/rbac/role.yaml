@@ -1,0 +1,33 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  creationTimestamp: null
+  name: manager-role
+rules:
+- apiGroups:
+  - groupsp.measutosh.dev
+  resources:
+  - kindcustomhttps
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - groupsp.measutosh.dev
+  resources:
+  - kindcustomhttps/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - groupsp.measutosh.dev
+  resources:
+  - kindcustomhttps/status
+  verbs:
+  - get
+  - patch
+  - update

@@ -1,0 +1,31 @@
+# permissions for end users to edit kindcustomhttps.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    app.kubernetes.io/name: clusterrole
+    app.kubernetes.io/instance: kindcustomhttp-editor-role
+    app.kubernetes.io/component: rbac
+    app.kubernetes.io/created-by: http-go-operator
+    app.kubernetes.io/part-of: http-go-operator
+    app.kubernetes.io/managed-by: kustomize
+  name: kindcustomhttp-editor-role
+rules:
+- apiGroups:
+  - groupsp.measutosh.dev
+  resources:
+  - kindcustomhttps
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - groupsp.measutosh.dev
+  resources:
+  - kindcustomhttps/status
+  verbs:
+  - get

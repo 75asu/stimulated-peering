@@ -1,0 +1,22 @@
+apiVersion: groupsp.measutosh.dev/v1
+kind: KindCustomHttp
+metadata:
+  labels:
+    app.kubernetes.io/name: kindcustomhttp
+    app.kubernetes.io/instance: kindcustomhttp-sample
+    app.kubernetes.io/part-of: http-go-operator
+    app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/created-by: http-go-operator
+  name: kindcustomhttp-sample
+  namespace: peerns
+spec:
+  port: 80
+  replicaCount: 3
+  configMapData:
+    hostports: |
+      localhost,8080
+      localhost,8080
+
+
+
+# http-go-operator/config/samples/groupsp_v1_kindcustomhttp.yaml
