@@ -11,12 +11,9 @@ metadata:
   namespace: peerns
 spec:
   port: 80
-  replicaCount: 3
+  replicaCount: 2
   configMapData:
     hostports: |
       localhost,8080
-      localhost,8080
 
 
-
-# http-go-operator/config/samples/groupsp_v1_kindcustomhttp.yaml
