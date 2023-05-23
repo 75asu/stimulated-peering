@@ -174,7 +174,7 @@ kubectl logs pod/<pod-name>
 ```
 ![p2multipleServers](./images/p2multipleServers.PNG)
 
-- **If the configmap gets updated, the pod gets a config refresh and the servers get the fresh list of host and ports. Following which the ping requests to list of hosts also change.**
+- **If the configmap gets updated, the pod gets a config refresh and the servers get the fresh list of host and ports. Following which the ping requests to list of hosts also change.. This happens without restarting the pod from scratch. The configmap is made available as files in the `/config` location to the server. So if config gets updated then that file will change, there is no need to start the pod again. Server can decide which host it needs to hit.**
 
 - _Below two servers are getting hit by the provided pod._
 
@@ -196,3 +196,18 @@ _**Run below commands to clear the resources which were created**_
 kubectl delete -f ./config/samples/groupsp_v1_kindcustomhttp.yaml
 kubectl delete deployment.apps/kindcustomhttp-sample service/kindcustomhttp-sample  configmap/kindcustomhttp-sample-configmap
 ```
+
+
+## Ideas For Further Improvement Of The Current Project
+
+- _**Unit Testing**_: Implement unit tests to verify the correctness of the controller's logic. Write test cases to cover different scenarios and edge cases, ensuring robustness and reliability.
+
+- _**Fine-grained Event Handling**_: Review the event handling logic in the SetupWithManager function. Currently, all update events for services trigger reconciliation. Consider refining the event filtering predicates to handle specific events more accurately.
+
+- _**Resource Ownership**_: Ensure proper ownership and deletion of resources. Validate whether the controller should own and delete the associated resources (e.g., Deployment, Service, ConfigMap) when the CustomResource (KindCustomHttp) is deleted.
+
+- _**Error Reporting**_: Enhance the error reporting mechanism to provide detailed information about the failures encountered during reconciliation. This will assist in troubleshooting and identifying the root causes of errors.
+
+- _**Configuration Flexibility**_: Evaluate whether the controller's configuration parameters, such as image name, container ports, labels, etc., should be made configurable via CustomResource fields. This can provide more flexibility and customization options to users.
+
+- _**Validation and Update Strategy**_: Review the validation and update strategy for the custom resource and adjust it based on the requirements of the project. This may involve validating the fields, handling updates correctly, and ensuring that the controller behaves as expected during resource reconciliation.
